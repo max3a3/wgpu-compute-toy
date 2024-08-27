@@ -1,0 +1,5 @@
+updata jotai so noneed jotai-game?
+
+add tailwind
+
+right now canvas is hardcoded

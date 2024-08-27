@@ -1,0 +1,35 @@
+import {useAtom, useSetAtom} from 'jotai';
+import {useCallback, useState} from "react";
+import {canvasElAtom, wgpuAvailabilityAtom} from "./wgputoyatoms";
+// wgputoy.tsx
+const WgpuToyWrapper = props => {
+    const setCanvasEl = useSetAtom(canvasElAtom);
+    const [wgpuAvailability, setWgpuAvailability] = useAtom(wgpuAvailabilityAtom);
+    const [loaded, setLoaded] = useState(false);
+    const canvasRef = useCallback(async canvas => {
+        // there may be a case where we don't have the canvas *yet*
+        if (canvas && canvas.getContext('webgpu') && 'gpu' in navigator) {
+            const adapter = await navigator.gpu.requestAdapter();
+            if (adapter) {
+                const device = await adapter.requestDevice();
+                if (device) {
+                    setWgpuAvailability('available');
+                    setCanvasEl(canvas);
+                    setLoaded(true);
+                } else {
+                    setWgpuAvailability('unavailable');
+                }
+            } else {
+                setWgpuAvailability('unavailable');
+            }
+        } else {
+            setWgpuAvailability('unavailable');
+        }
+    }, []);
+    return (
+        <canvas width={800} height={600}
+            ref={canvasRef}
+        ></canvas>
+    )
+}
+export default WgpuToyWrapper
