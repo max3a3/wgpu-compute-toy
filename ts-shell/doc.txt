@@ -1,0 +1,10 @@
+atom
+
+canvasParentElAtom
+  set in App,
+  used in wgputoyAtom getter before it call create_renderer (it check app is init)
+
+canvasElAtom
+  set in WgpuToyWrapper refere to the canvas and checked that canvas support gpu
+
+wgputoyAtom used in Controller, check canvasElAtom, canvasParentElAtom

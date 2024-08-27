@@ -22,6 +22,7 @@ export default function Controller() {
     const [, setHeight] = useTransientAtom(heightAtom);
     const canvas = useAtomValue(canvasElAtom); // set by wgputoywrapper
     const updateResolution = () => {
+        debugger
         if (isSafeContext(wgputoy)) {
             let dimensions = { x: 0, y: 0 }; // dimensions in device (physical) pixels
 

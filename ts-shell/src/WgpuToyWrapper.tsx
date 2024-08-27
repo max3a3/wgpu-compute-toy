@@ -17,17 +17,21 @@ const WgpuToyWrapper = props => {
                     setCanvasEl(canvas);
                     setLoaded(true);
                 } else {
+                    debugger // no gpu
                     setWgpuAvailability('unavailable');
                 }
             } else {
+                debugger // no gpu
                 setWgpuAvailability('unavailable');
             }
         } else {
             setWgpuAvailability('unavailable');
         }
     }, []);
+    // have to have the id
     return (
         <canvas width={800} height={600}
+                id={"editor-canvas"}
             ref={canvasRef}
         ></canvas>
     )
