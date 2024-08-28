@@ -42,3 +42,4 @@ export const canvasParentElAtom = atom<HTMLElement | null, [HTMLElement | null],
     },
     (get, set, newValue) => set(canvasParentElBaseAtom, newValue ? newValue : false)
 );
+export const wgputoyPreludeAtom = atom<string>('');

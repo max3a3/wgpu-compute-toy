@@ -735,6 +735,11 @@ typescript@^4.4.4:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.5.tgz#095979f9bcc0d09da324d58d03ce8f8374cbe65a"
   integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
 
+use-animation-frame@^0.1.4:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/use-animation-frame/-/use-animation-frame-0.1.5.tgz#29613ba47c20b112367e9a231e264182cbb317dc"
+  integrity sha512-oANuaUtRxwA9OKvSY+Sp9aVnLtrZjHknFklPc7jIZw9qWIto9lth1OYl0JqwtBofQXc1b3PNFDfmn/hBj4NzKw==
+
 vite-plugin-wasm@~3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/vite-plugin-wasm/-/vite-plugin-wasm-3.3.0.tgz#2908ef2529bf8f33f4e549c8c6fda26ad273ca15"

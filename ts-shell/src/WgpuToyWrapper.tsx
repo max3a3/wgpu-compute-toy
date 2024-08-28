@@ -28,7 +28,7 @@ const WgpuToyWrapper = props => {
             setWgpuAvailability('unavailable');
         }
     }, []);
-    // have to have the id
+    // have to have the id so wasm can init itself
     return (
         <canvas width={800} height={600}
                 id={"editor-canvas"}
