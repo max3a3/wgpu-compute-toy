@@ -15,7 +15,6 @@ export default function App() {
         <div ref={renderParentNodeRef}>
             <div>app</div>
             <WgpuToyWrapper/>
-            <Controller/>
         </div>
     )
 }

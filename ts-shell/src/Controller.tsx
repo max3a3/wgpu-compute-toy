@@ -27,7 +27,6 @@ export default function Controller() {
     const [manualReload, setManualReload] = useTransientAtom(manualReloadAtom);
     const [isPlaying, setIsPlaying] = useTransientAtom(isPlayingAtom);
     const [timer, setTimer] = useTransientAtom(timerAtom);
-
     const updateUniforms = useCallback(async () => {
         if (isSafeContext(wgputoy)) {
             /* NOT YET
@@ -59,20 +58,23 @@ export default function Controller() {
                 setManualReload(false);
             }
         });
-    }, [wgputoy]);
+    }, []);
     const handleSuccess = useCallback(entryPoints => {
         // not doing anything
         // setEntryPoints(entryPoints);
     }, [])
-
+    const liveReloadCallback = useCallback(() => {
+        if (manualReload()) { // if there is trigger
+            reloadCallback();
+        }
+    },[])
     useEffect(() => {
         if (isSafeContext(wgputoy)) {
             wgputoy.on_success(handleSuccess);
         }
-    }, [wgputoy]);
+    }, []);
 
     const updateResolution = () => {
-        debugger
         if (isSafeContext(wgputoy)) {
             let dimensions = {x: 0, y: 0}; // dimensions in device (physical) pixels
 
@@ -88,10 +90,8 @@ export default function Controller() {
                 setHeight(dimensions.y);
                 setScale(newScale);
                 wgputoy.resize(dimensions.x, dimensions.y, newScale);
-                debugger
-                //                reloadCallback();  // load the source
+                reloadCallback();  // reload the shader
             }
-            debugger
             if (canvas) {
                 canvas.width = dimensions.x;
                 canvas.height = dimensions.y;
@@ -106,7 +106,14 @@ export default function Controller() {
 
     useAnimationFrame(e => {
         if (isSafeContext(wgputoy)) {
-            reloadCallback();//todo just compile once?  check rust if it cached the string
+            // TODO custom uniform handling not yet
+            // if (sliderUpdateSignal()) {
+            //     updateUniforms().then(() => {
+            //         liveReloadCallback();
+            //     });
+            // } else {
+                liveReloadCallback();// check if there is manualReload trigger
+
             if (isPlaying() || manualReload()) {
                 let t = timer();
                 if (!manualReload()) {

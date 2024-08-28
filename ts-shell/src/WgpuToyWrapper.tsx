@@ -1,6 +1,7 @@
 import {useAtom, useSetAtom} from 'jotai';
 import {useCallback, useState} from "react";
 import {canvasElAtom, wgpuAvailabilityAtom} from "./wgputoyatoms";
+import Controller from "./Controller";
 // wgputoy.tsx
 const WgpuToyWrapper = props => {
     const setCanvasEl = useSetAtom(canvasElAtom);
@@ -30,10 +31,13 @@ const WgpuToyWrapper = props => {
     }, []);
     // have to have the id so wasm can init itself
     return (
+        <div>
         <canvas width={800} height={600}
                 id={"editor-canvas"}
             ref={canvasRef}
         ></canvas>
+            {loaded&&<Controller/>}
+        </div>
     )
 }
 export default WgpuToyWrapper
