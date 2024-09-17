@@ -11,7 +11,6 @@ import {atom, useAtom, useAtomValue, useSetAtom} from 'jotai';
 import {useTransientAtom} from 'jotai-game';
 import {heightAtom, isPlayingAtom, manualReloadAtom, scaleAtom, timerAtom, widthAtom} from "./atoms";
 import useResizeObserver from "@react-hook/resize-observer";
-// @ts-ignore
 import geometryShader from "./shaders/geometry.wgsl"
 import useAnimationFrame from 'use-animation-frame';
 
@@ -28,7 +27,7 @@ export default function Controller() {
     const [manualReload, setManualReload] = useTransientAtom(manualReloadAtom);
     const [isPlaying, setIsPlaying] = useTransientAtom(isPlayingAtom);
     const [timer, setTimer] = useTransientAtom(timerAtom);
-    const updateUniforms = useCallback(async () => {
+        const updateUniforms = useCallback(`z` () => {
         if (isSafeContext(wgputoy)) {
             /* NOT YET
             const names: string[] = [];
@@ -48,6 +47,9 @@ export default function Controller() {
     const reloadCallback = useCallback(() => {
         updateUniforms().then(() => {
             if (isSafeContext(wgputoy)) {
+                let filename = window.ENV_FLAGS.shaderFile ?? "geometry"
+                import (`./shaders/${filename}.wgsl`).then(geometryShaderModule => {
+                    const geometryShader = geometryShaderModule.default
                 wgputoy.preprocess(geometryShader).then(s => {
                     if (s) {
                         console.log(`compiling, should just do it once?`)
@@ -57,6 +59,7 @@ export default function Controller() {
                     }
                 });
                 setManualReload(false);
+            })
             }
         });
     }, []);

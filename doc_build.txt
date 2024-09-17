@@ -1,0 +1,18 @@
+wasm-pack build --no-opt --dev --out-dir ./ts-shell/lib/   this is for 0.13
+   0.12 has --no-pot 
+wasm-pack build --dev --out-dir ./ts-shell/lib/ 
+
+wasm-pack build --target --dev --out-dir ./ts-shell/lib/ 
+
+default target is bundler
+
+
+we are trying to have the same .js wasm wrapper as modyfi, still can't figure out what version it is as
+ the source for wasm-pack also rely on other cargo for the genrating of the .js wasm wrapper itself
+
+wasm-pack --version 
+0.13.0  is latest but don't have __wbg_init that mody uses it has __wbg_set_wasm instead 
+C:\work\wgpu\wgpu-compute-toy\ts-shell\lib_0.13
+
+cargo uninstall wasm-pack
+cargo install wasm-pack --version 0.12.0

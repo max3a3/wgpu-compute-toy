@@ -1,5 +1,9 @@
-updata jotai so noneed jotai-game?
+updata jotai so no need jotai-game?
+  i think go to redux tolkitis better
 
 add tailwind
 
-right now canvas is hardcoded
+
+dynamic canvas size, it got the resize change from the resize observer and pass to wasm whcih change the canvas
+
+try https://compute.toys/view/1165 with uniform ray marching columns

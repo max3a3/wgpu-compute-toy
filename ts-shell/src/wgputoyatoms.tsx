@@ -1,4 +1,5 @@
 import { atom } from 'jotai';
+// import { create_renderer, WgpuToyRenderer } from '../lib_0.13/wgputoy'; // see if can run when using older wasm-pack
 import { create_renderer, WgpuToyRenderer } from '../lib/wgputoy';
 type WgpuStatus = 'available' | 'unavailable' | 'unknown';
 interface Dimensions {
