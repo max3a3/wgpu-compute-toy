@@ -1,4 +1,9 @@
-atom
+after clone have to build the lib first
+wasm-pack build --dev --out-dir ts-shell/lib/wgputoy
+as we are using wasm-plugin in vite the import in \ts-shell\src\wgputoyatoms.tsx
+ will load the wasm and call the init automatically
+
+atom used
 
 canvasParentElAtom
   set in App,

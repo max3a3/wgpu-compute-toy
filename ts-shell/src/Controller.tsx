@@ -11,7 +11,8 @@ import {atom, useAtom, useAtomValue, useSetAtom} from 'jotai';
 import {useTransientAtom} from 'jotai-game';
 import {heightAtom, isPlayingAtom, manualReloadAtom, scaleAtom, timerAtom, widthAtom} from "./atoms";
 import useResizeObserver from "@react-hook/resize-observer";
-import shaderString from "./shaders/geom"
+// @ts-ignore
+import geometryShader from "./shaders/geometry.wgsl"
 import useAnimationFrame from 'use-animation-frame';
 
 const halfResolution = false
@@ -47,7 +48,7 @@ export default function Controller() {
     const reloadCallback = useCallback(() => {
         updateUniforms().then(() => {
             if (isSafeContext(wgputoy)) {
-                wgputoy.preprocess(shaderString).then(s => {
+                wgputoy.preprocess(geometryShader).then(s => {
                     if (s) {
                         console.log(`compiling, should just do it once?`)
                         wgputoy.compile(s);

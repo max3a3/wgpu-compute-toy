@@ -1,11 +1,9 @@
-//https://compute.toys/view/1319
-export default `
 
 fn f_n(
-    o_trn_nor_pix: vec2f, 
+    o_trn_nor_pix: vec2f,
     n_it_nor: f32
 )->f32{
-    
+
     var n_t = time.elapsed*.3;
     let nl = length(o_trn_nor_pix);
     let n_tau = radians(360.);
@@ -18,9 +16,9 @@ fn f_n(
     var n = length(o_trn_nor_pix.xy-o.xy);
     var n_radius = (sin((n_t+n_it_nor)*n_tau)*.5+.5)*.2;
     n = abs(n-n_radius);
-    var b = 0.003;//+(sin(nl*99.+n_t)*.5+.5)*.002; 
+    var b = 0.003;//+(sin(nl*99.+n_t)*.5+.5)*.002;
     //n = pow(n, 1./10.);
-    n = -b*(1./(n+b))+1.005; 
+    n = -b*(1./(n+b))+1.005;
     n =pow(n, 1.1);
     // n = smoothstep(0.2, 0.0, n);
     //n = clamp(n, 0., 1.);
@@ -29,7 +27,7 @@ fn f_n(
 }
 @compute @workgroup_size(16, 16)
 fn main_image(
-    @builtin(global_invocation_id) 
+    @builtin(global_invocation_id)
     o_trn_pixel: vec3u
 ) {
     // Viewport resolution (in pixels)
@@ -62,5 +60,3 @@ fn main_image(
     // Output to screen (linear o_colour space)
     textureStore(screen, o_trn_pixel.xy, vec4f(o_col, 1.));
 }
-
-`
