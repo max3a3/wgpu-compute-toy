@@ -62,7 +62,8 @@ mod winit {
         let filename = if std::env::args().len() > 1 {
             std::env::args().nth(1).unwrap()
         } else {
-            "examples/default.wgsl".to_string()
+            // "examples/default.wgsl".to_string()
+            "examples/demofox/path-tracing.wgsl".to_string()
         };
         let shader = std::fs::read_to_string(&filename)?;
 
